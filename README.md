@@ -1,5 +1,9 @@
 # product_management
 
+# Email and password
+ emailL: admin@gmail.com
+ password : password
+ 
 ## Project setup
 ```
 npm install
