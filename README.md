@@ -3,7 +3,10 @@
 # Email and password
  email: admin@gmail.com
  password : password
- 
+
+#start json server
+json-server --watch db.json
+
 ## Project setup
 ```
 npm install
