@@ -4,9 +4,6 @@
 ```
 npm install
 ```
-## Email / Password
-Email: admin@gmail.com 
-Password : password
 
 ### Compiles and hot-reloads for development
 ```

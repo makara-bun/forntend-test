@@ -47,6 +47,14 @@
       "quantity": "15",
       "image": "5.jpg",
       "id": 5
+    },
+    {
+      "name": "nex",
+      "description": "suzuke",
+      "price": "1900$",
+      "quantity": "30",
+      "image": "12.jpg",
+      "id": 6
     }
   ]
 }

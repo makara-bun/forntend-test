@@ -16,6 +16,8 @@
                   label="Email"
                   type="text"
                   v-model="email"
+                  :rules="emailRules"
+                  required
                 ></v-text-field>
                 <v-text-field
                   id="password"
@@ -24,6 +26,8 @@
                   label="Password"
                   type="password"
                   v-model="password"
+                  :rules="passwordRules"
+                  required
                 ></v-text-field>
               </v-form>
             </v-card-text>
@@ -45,7 +49,13 @@ export default {
   data () {
     return {
       password: "",
-      email: ""
+      email: "",
+      emailRules: [
+        v => !!v || 'email is required',
+      ],
+      passwordRules: [
+        v => !!v || 'password is required',
+      ]
     }
   },
   mounted () {
