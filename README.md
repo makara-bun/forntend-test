@@ -1,7 +1,7 @@
 # product_management
 
 # Email and password
- emailL: admin@gmail.com
+ email: admin@gmail.com
  password : password
  
 ## Project setup
