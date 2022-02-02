@@ -1,0 +1,52 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "email": "admin@gmail.com",
+      "name": "admin",
+      "password": "password"
+    }
+  ],
+  "product": [
+    {
+      "name": "icon",
+      "description": "honda",
+      "price": "$1800",
+      "quantity": "20",
+      "image": "1.jpg",
+      "id": 1
+    },
+    {
+      "name": "dream ",
+      "description": "honda",
+      "price": "$2300",
+      "quantity": "30",
+      "image": "2.PNG",
+      "id": 2
+    },
+    {
+      "name": "duke",
+      "description": "ktm",
+      "price": "$3000",
+      "quantity": "0",
+      "image": "3.jpg",
+      "id": 3
+    },
+    {
+      "name": "qbix",
+      "description": "yamahz",
+      "price": "$2000",
+      "quantity": "10",
+      "image": "4.jpg",
+      "id": 4
+    },
+    {
+      "name": "nex",
+      "description": "suzuke",
+      "price": "$1700",
+      "quantity": "15",
+      "image": "5.jpg",
+      "id": 5
+    }
+  ]
+}
