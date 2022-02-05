@@ -16,8 +16,8 @@
                   label="Email"
                   type="text"
                   v-model="email"
-                  :rules="emailRules"
-                  required
+                  :error-messages="emailErrors"
+                  @blur="$v.email.$touch()"
                 ></v-text-field>
                 <v-text-field
                   id="password"
@@ -26,8 +26,8 @@
                   label="Password"
                   type="password"
                   v-model="password"
-                  :rules="passwordRules"
-                  required
+                  :error-messages="passwordErrors"
+                  @blur="$v.password.$touch()"
                 ></v-text-field>
               </v-form>
             </v-card-text>
@@ -44,18 +44,14 @@
 </template>
 
 <script>
+import { required, email } from 'vuelidate/lib/validators'
+
 export default { 
   name: 'Login',
   data () {
     return {
       password: "",
       email: "",
-      emailRules: [
-        v => !!v || 'email is required',
-      ],
-      passwordRules: [
-        v => !!v || 'password is required',
-      ]
     }
   },
   mounted () {
@@ -67,11 +63,31 @@ export default {
   methods: {
   //Login
     async login () {
+      this.$v.$touch()
       this.$store.dispatch("login",{
         email:this.email,
         password:this.password
       })
     }
+  },
+  computed: {
+    emailErrors () {
+      const errors = []
+        if(!this.$v.email.$dirty) return errors
+        !this.$v.email.email && errors.push('Must be valid e-mail')
+        !this.$v.email.required && errors.push('Email is required')
+        return errors
+    },
+    passwordErrors () {
+      const errors = []
+        if(!this.$v.password.$dirty) return errors
+        !this.$v.password.required && errors.push('Password is required')
+        return errors
+    }
+  },
+  validations: {
+    email: {required, email},
+    password: {required}
   }
 }
 </script>

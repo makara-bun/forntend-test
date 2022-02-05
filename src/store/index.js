@@ -93,7 +93,7 @@ export default new Vuex.Store({
       })
     },
     searchQuantity ({commit},{min,max}) {
-      axios.get(`http://localhost:3000/product/?quantity_gte${min}&quantity_lte=${max}`)
+      axios.get(`http://localhost:3000/product/?quantity_gte=${min}&quantity_lte=${max}`)
       .then(res => {
         commit ('rangeQuantity',res.data)
         console.log(res.data);

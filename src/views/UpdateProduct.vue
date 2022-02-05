@@ -9,17 +9,43 @@
         </v-row>
         <v-row>
           <v-col cols="12">
-            <v-text-field label="Name" v-model="product.name"></v-text-field>
-            <v-text-field label="Description" v-model="product.description"></v-text-field>
-            <v-text-field label="Price" v-model="product.price"></v-text-field>
-            <v-text-field label="Quantity" v-model="product.quantity"></v-text-field>
-            <v-file-input
-              label="Picture"
-              filled
-              v-model="product.image"
-              @change="onFileSelected"
-              prepend-icon="mdi-camera"
-            ></v-file-input>
+            <v-form ref="form">
+              <v-text-field 
+              label="Name" 
+              v-model="product.name"
+              :error-messages="nameErrors"
+              @blur="$v.product.name.$touch()"
+              >
+              </v-text-field>
+              <v-text-field 
+              label="Description" 
+              v-model="product.description"
+              :error-messages="descriptionErrors"
+              @blur="$v.product.description.$touch()"
+              > 
+              </v-text-field>
+              <v-text-field 
+              label="Price" 
+              v-model.number="product.price"
+              :error-messages="priceErrors"
+              @blur="$v.product.price.$touch()"
+              > 
+              </v-text-field>
+              <v-text-field 
+              label="Quantity" 
+              v-model.number="product.quantity"
+              :error-messages="quantityErrors"
+              @blur="$v.product.quantity.$touch()"
+              ></v-text-field>
+              <v-file-input
+                label="Picture"
+                filled
+                v-model="product.image"
+                @change="onFileSelected"
+                prepend-icon="mdi-camera"
+                @blur="$v.product.image.$touch()"
+              ></v-file-input>
+            </v-form>
           </v-col>
         </v-row>
       <v-btn color="red float-right pa-5 mt-2 ml-2" dark @click="back">Back</v-btn>
@@ -32,6 +58,8 @@
 <script>
 import HeaderBar from "../components/HeaderBar.vue"
 import axios from 'axios'
+import {required, numeric, requiredIf} from 'vuelidate/lib/validators'
+// import router from "../router";
 
 export default {
   name: 'Update',
@@ -44,9 +72,22 @@ export default {
       product : {
         name: '',
         description: '',
-        price: '',
-        quantity: '',
+        price:  null,
+        quantity: null,
         image: null
+      }
+    }
+  },
+  validations: {
+    product: {
+      name: {required},
+      description: {required},
+      price: {required, numeric},
+      quantity: {required, numeric},
+      image: {
+        required: requiredIf(function () {
+          return this.form.image === null;
+        })
       }
     }
   },
@@ -54,11 +95,9 @@ export default {
     onFileSelected(){
       this.product.image = event.target.files[0].name;
     },
-    back () {
-      this.$router.push({name:"home"})
-    },
   //Update Product 
     updateProduct () {
+      this.$v.$touch();
       const formData = {
         id:this.id,
         name:this.product.name,
@@ -67,9 +106,47 @@ export default {
         quantity: this.product.quantity,
         image: this.product.image
       }
-      console.log(this.id);
-      this.$store.dispatch("updateProduct",formData)
+      if (this.$v.$invalid) {
+        return false 
+      } else {
+        this.$store.dispatch('updateProduct',formData); 
+      }
     },
+    back () {
+      this.$router.push({name:"home"})
+    }
+  },
+  computed: {
+    nameErrors () {
+      const errors = []
+        if(!this.$v.product.name.$dirty) return errors
+        !this.$v.product.name.required && errors.push('Name is required')
+        return errors
+    },
+     descriptionErrors () {
+      const errors = []
+        if(!this.$v.product.description.$dirty) return errors
+        !this.$v.product.description.required && errors.push('description is required')
+        return errors
+    },
+     priceErrors () {
+      const errors = []
+        if(!this.$v.product.price.$dirty) return errors
+        !this.$v.product.price.required && errors.push('price is required')
+        return errors
+    },
+     quantityErrors () {
+      const errors = []
+        if(!this.$v.product.quantity.$dirty) return errors
+        !this.$v.product.quantity.required && errors.push('quantity is required')
+        return errors
+    },
+    // nameErrors () {
+    //   const errors = []
+    //     if(!this.$v.product.name.$dirty) return errors
+    //     !this.$v.product.name.required && errors.push('Name is required')
+    //     return errors
+    // },
   },
   async mounted () {
     let user = localStorage.getItem("user-info");

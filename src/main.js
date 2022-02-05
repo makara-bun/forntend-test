@@ -7,6 +7,9 @@ import vuetify from './plugins/vuetify'
 import Swal from 'sweetalert2'
 window.Swal = Swal
 
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+
 const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',

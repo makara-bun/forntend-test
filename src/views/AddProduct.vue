@@ -10,10 +10,33 @@
         <v-row>
           <v-col cols="12">
             <v-form ref="form">
-              <v-text-field label="Name" v-model="product.name" :rules="inputRules" required></v-text-field>
-              <v-text-field label="Description" v-model="product.description" :rules="inputRules" required></v-text-field>
-              <v-text-field label="Price" v-model="product.price" :rules="inputRules" required></v-text-field>
-              <v-text-field label="Quantity" v-model="product.quantity" :rules="inputRules" required ></v-text-field>
+              <v-text-field 
+              label="Name" 
+              v-model="product.name"
+              :error-messages="nameErrors"
+              @blur="$v.product.name.$touch()"
+              >
+              </v-text-field>
+              <v-text-field 
+              label="Description" 
+              v-model="product.description"
+              :error-messages="descriptionErrors"
+              @blur="$v.product.description.$touch()"
+              > 
+              </v-text-field>
+              <v-text-field 
+              label="Price" 
+              v-model.number="product.price"
+              :error-messages="priceErrors"
+              @blur="$v.product.price.$touch()"
+              > 
+              </v-text-field>
+              <v-text-field 
+              label="Quantity" 
+              v-model.number="product.quantity"
+              :error-messages="quantityErrors"
+              @blur="$v.product.quantity.$touch()"
+              ></v-text-field>
               <v-file-input
                 label="Picture"
                 filled
@@ -33,8 +56,8 @@
 
 <script>
 import HeaderBar from "../components/HeaderBar.vue"
-// import axios from 'axios'
-// import router from "../router";
+import {required, numeric} from 'vuelidate/lib/validators'
+import router from "../router";
 
 export default {
   components: {
@@ -45,13 +68,10 @@ export default {
       product : {
         name: '',
         description: '',
-        price: '',
-        quantity: '',
-        image: null
-      },
-      inputRules: [
-        v => !!v || 'input is required',
-      ],
+        price: null,
+        quantity: null,
+        image: []
+      }
     }
   },
   methods : {
@@ -60,21 +80,71 @@ export default {
     },
 //Add Product
     addProduct () {
-      if (this.$refs.form.validate()) {
-        const formData = {
-        name:this.product.name,
-        description:this.product.description,
-        price: this.product.price,
-        quantity: this.product.quantity,
-        image: this.product.image
-        }
-        this.$store.dispatch("addProduct",formData)
+      this.$v.$touch();
+      const formData = {
+      name:this.product.name,
+      description:this.product.description,
+      price: this.product.price,
+      quantity: this.product.quantity,
+      image: this.product.image
       }
-    },
-      
+      if (this.$v.$invalid) {
+        return
+      } else {
+        this.$store.dispatch('addProduct',formData);
+      }
+      setTimeout(function () {
+        router.go();
+      },1300);
+    }, 
     back () {
       this.$router.push({name:"home"})
     }
+  },
+  validations: {
+    product: {
+      name: {required},
+      description: {required},
+      price: {required, numeric},
+      quantity: {required, numeric},
+      // image: {
+      //   required: requiredIf(function () {
+      //     return this.product.image === null;
+      //   })
+      // }
+    }
+  },
+  computed: {
+    nameErrors () {
+      const errors = []
+        if(!this.$v.product.name.$dirty) return errors
+        !this.$v.product.name.required && errors.push('Name is required')
+        return errors
+    },
+     descriptionErrors () {
+      const errors = []
+        if(!this.$v.product.description.$dirty) return errors
+        !this.$v.product.description.required && errors.push('description is required')
+        return errors
+    },
+     priceErrors () {
+      const errors = []
+        if(!this.$v.product.price.$dirty) return errors
+        !this.$v.product.price.required && errors.push('price is required')
+        return errors
+    },
+     quantityErrors () {
+      const errors = []
+        if(!this.$v.product.quantity.$dirty) return errors
+        !this.$v.product.quantity.required && errors.push('quantity is required')
+        return errors
+    },
+    imageErrors () {
+      const errors = []
+        if(!this.$v.product.image.$dirty) return errors
+        !this.$v.product.image.required && errors.push('image is required')
+        return errors
+    },
   },
   mounted () {
     let user = localStorage.getItem("user-info");

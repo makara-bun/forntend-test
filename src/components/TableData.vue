@@ -7,7 +7,7 @@
       :item-class="itemRowBackground"
     >
       <template v-slot:item.quantity="{value}" >
-        <span class="red--text" v-if="value === '0'">Out of stock</span>
+        <span class="red--text" v-if="value === 0">Out of stock</span>
         <span v-else>{{value}}</span>
       </template>
       <template v-slot:item.action="{item}">
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import router from '../router'
 
 export default {

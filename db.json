@@ -9,52 +9,36 @@
   ],
   "product": [
     {
-      "name": "icon",
+      "name": "icon ",
       "description": "honda",
-      "price": "$1800",
-      "quantity": "20",
+      "price": 1700,
+      "quantity": 20,
       "image": "1.jpg",
       "id": 1
     },
     {
-      "name": "dream ",
+      "name": "zoomer",
       "description": "honda",
-      "price": "$2300",
-      "quantity": "30",
-      "image": "2.PNG",
+      "price": 2600,
+      "quantity": 40,
+      "image": "2.jpg",
       "id": 2
     },
     {
-      "name": "duke",
-      "description": "ktm",
-      "price": "$3000",
-      "quantity": "0",
-      "image": "3.jpg",
+      "name": "step",
+      "description": "yamaha",
+      "price": 1600,
+      "quantity": 10,
+      "image": "6.jpg",
       "id": 3
     },
     {
-      "name": "qbix",
-      "description": "yamahz",
-      "price": "$2000",
-      "quantity": "10",
-      "image": "4.jpg",
+      "name": "nex",
+      "description": "yamaha",
+      "price": 1900,
+      "quantity": 0,
+      "image": "11.jpg",
       "id": 4
-    },
-    {
-      "name": "nex",
-      "description": "suzuke",
-      "price": "$1700",
-      "quantity": "15",
-      "image": "5.jpg",
-      "id": 5
-    },
-    {
-      "name": "nex",
-      "description": "suzuke",
-      "price": "1900$",
-      "quantity": "30",
-      "image": "12.jpg",
-      "id": 6
     }
   ]
 }
