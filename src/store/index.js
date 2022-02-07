@@ -55,8 +55,8 @@ export default new Vuex.Store({
   actions: {
   // Login
     login ({commit}, {email,password}) {
-       axios.get (`http://localhost:3000/user?email=${email}&password=${password}`)
-       .then (result => {
+      axios.get (`http://localhost:3000/user?email=${email}&password=${password}`)
+      .then (result => {
         if (result.status===200 && result.data.length > 0) {
           commit('isLogin',true)
           localStorage.setItem("user-info",JSON.stringify(result.data[0].name))
@@ -96,7 +96,6 @@ export default new Vuex.Store({
       axios.get(`http://localhost:3000/product/?quantity_gte=${min}&quantity_lte=${max}`)
       .then(res => {
         commit ('rangeQuantity',res.data)
-        console.log(res.data);
       })
     },
   //Add Product
@@ -109,10 +108,10 @@ export default new Vuex.Store({
         image: productData.image
       })
       .then(res => {
-          // eslint-disable-next-line no-undef
-          Toast.fire({
-            icon: 'success',
-            title: 'Data added successfully'
+        // eslint-disable-next-line no-undef
+        Toast.fire({
+          icon: 'success',
+          title: 'Data added successfully'
         })
         router.push({name:'home'});
         commit('insertProduct',res.data);
@@ -123,7 +122,7 @@ export default new Vuex.Store({
             icon: 'error',
             title: 'Data added unsuccessfully '
         })
-        console.log(error);
+        error
     })
     },
   //Update Product
@@ -137,29 +136,29 @@ export default new Vuex.Store({
         image: productData.image
       })
       .then(res => {
-             // eslint-disable-next-line no-undef
-             Toast.fire({
-              icon: 'success',
-              title: 'Product updated  successfully'
-          })
-          console.log(res.data);
-          router.push({name:'home'});
-          commit('updatedProduct',res.data);
+        // eslint-disable-next-line no-undef
+        Toast.fire({
+        icon: 'success',
+        title: 'Product updated  successfully'
+      })
+        console.log(res.data);
+        router.push({name:'home'});
+        commit('updatedProduct',res.data);
       })
       .catch(error=>{
         // eslint-disable-next-line no-undef
         Toast.fire({
-            icon: 'error',
-            title: 'Product updated unsuccessfully '
+          icon: 'error',
+          title: 'Product updated unsuccessfully '
         })
-        console.log(error);
-    })
+        error
+      })
     },
   //delete product 
     deleteProduct({commit},{id}) {
       axios.delete(`http://localhost:3000/product/${id}`)
       .then(res => {
-        console.log(res.data);
+        res.data
         commit('deletedProduct',id)
       })
     }

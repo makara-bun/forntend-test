@@ -61,13 +61,11 @@ export default {
           this.$store.dispatch("deleteProduct",{id:id})
           setTimeout(() => {
             router.go()
-          },600
-          );
+          },600);
         }
       })
     },
     itemRowBackground: function (item) {
-      console.log(item);
      return item.quantity <= 10 ? 'highlight-color ' : 'normal-color'
     }
   },
@@ -83,10 +81,10 @@ export default {
 </script>
 
 <style>
-.highlight-color {
-  background-color: #B9F6CA;
-}
-.normal-color {
-  background-color: white;
-}
+  .highlight-color {
+    background-color: #B9F6CA;
+  }
+  .normal-color {
+    background-color: white;
+  }
 </style>
