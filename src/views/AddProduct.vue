@@ -129,13 +129,13 @@ export default {
       !this.$v.product.description.required && errors.push('description is required')
       return errors
     },
-     priceErrors () {
+    priceErrors () {
       const errors = []
       if(!this.$v.product.price.$dirty) return errors
       !this.$v.product.price.required && errors.push('price is required')
       return errors
     },
-     quantityErrors () {
+    quantityErrors () {
       const errors = []
       if(!this.$v.product.quantity.$dirty) return errors
       !this.$v.product.quantity.required && errors.push('quantity is required')

@@ -16,38 +16,38 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-  //Login
+    //Login
     isLogin (state) {
       state.login = true
     },
-  //Get Product
+    //Get Product
     getProduct (state,product) {
       state.product = product
     },
-  // Add Product
+    // Add Product
     addProduct (state,product) {
       state.product = product
     },
-  // SearchProduct
+    // SearchProduct
     searchProduct (state,product) {
       state.product = product
     },
-  // Filter Product
+    // Filter Product
     filterPrice (state,product) {
       state.product = product
     },
-    rangeQuantity (state,product) {
+    filterQuantity (state,product) {
       state.product = product
     },
-  // Add Product
+    // Add Product
     insertProduct (state,product) {
       state.product.unshift(product) 
     },
-  // Update Product
+    // Update Product
     updatedProduct (state,product) {
       state.product.unshift(product)
     },
-  // Delete Product 
+    // Delete Product 
     deletedProduct (state,id) {
       state.product.filter(product => product.id !== id)
     }
@@ -70,7 +70,7 @@ export default new Vuex.Store({
       })
       .catch (error => console.log(error)) 
     },
-  // Get Data
+    // Get Data
     getData ({commit}) {
       axios.get(`http://localhost:3000/product`)
       .then (result => {
@@ -78,14 +78,14 @@ export default new Vuex.Store({
       })
       .catch (error => console.log(error)) 
     },
-  // Search Product
+    // Search Product
     searchProduct ({commit},{search}) {
       axios.get(`http://localhost:3000/product/?q=${search}`)
       .then(res => {
-       commit ('searchProduct',res.data)
+        commit ('searchProduct',res.data)
       })
     },
-  // Filter Search
+    // Filter Search
     searchPrice ({commit},{min,max}) {
       axios.get(`http://localhost:3000/product/?price_gte=${min}&price_lte=${max}`)
       .then(res => {
@@ -95,10 +95,10 @@ export default new Vuex.Store({
     searchQuantity ({commit},{min,max}) {
       axios.get(`http://localhost:3000/product/?quantity_gte=${min}&quantity_lte=${max}`)
       .then(res => {
-        commit ('rangeQuantity',res.data)
+        commit ('filterQuantity',res.data)
       })
     },
-  //Add Product
+    //Add Product
     addProduct ({commit}, productData) {
       axios.post("http://localhost:3000/product",{
         name: productData.name,
@@ -123,9 +123,9 @@ export default new Vuex.Store({
             title: 'Data added unsuccessfully '
         })
         error
-    })
+      })
     },
-  //Update Product
+    //Update Product
     updateProduct ({commit},productData) {
       let id = productData.id
       axios.put(`http://localhost:3000/product/${id}`,{  
@@ -154,7 +154,7 @@ export default new Vuex.Store({
         error
       })
     },
-  //delete product 
+    //delete product 
     deleteProduct({commit},{id}) {
       axios.delete(`http://localhost:3000/product/${id}`)
       .then(res => {

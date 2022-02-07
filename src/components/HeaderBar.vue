@@ -18,7 +18,7 @@
 <script>
 export default {
   methods: {
-  //Logout
+    //Logout
     logout () {
       localStorage.clear();
        // eslint-disable-next-line no-undef

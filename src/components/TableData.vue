@@ -41,11 +41,11 @@ export default {
     }
   },
   methods: {
-//updatePage
+    //updatePage
     updatePage (item) {
       this.$router.push({path: "/updateProduct/"+item.id})
     },
-//deleteProduct
+    //deleteProduct
     deleteProduct (id) {
       // eslint-disable-next-line no-undef
       Swal.fire({
@@ -66,7 +66,7 @@ export default {
       })
     },
     itemRowBackground: function (item) {
-     return item.quantity <= 10 ? 'highlight-color ' : 'normal-color'
+      return item.quantity <= 10 ? 'highlight-color ' : 'normal-color'
     }
   },
   computed : {

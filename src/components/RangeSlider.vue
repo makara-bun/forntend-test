@@ -65,7 +65,7 @@ export default {
         min : this.rangePrice[0],
         max : this.rangePrice[1]
       })   
-       },
+    },
     async filterQuantity () {
       this.$store.dispatch("searchQuantity",{
         min : this.rangeQuantity[0],

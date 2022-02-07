@@ -95,7 +95,7 @@ export default {
     onFileSelected(){
       this.product.fileName = event.target.files[0].name;
     },
-  //Update Product 
+    //Update Product 
     updateProduct () {
       this.$v.$touch();
       const formData = {
@@ -123,13 +123,13 @@ export default {
       !this.$v.product.name.required && errors.push('Name is required')
       return errors
     },
-     descriptionErrors () {
+    descriptionErrors () {
       const errors = []
       if(!this.$v.product.description.$dirty) return errors
       !this.$v.product.description.required && errors.push('description is required')
       return errors
     },
-     priceErrors () {
+    priceErrors () {
       const errors = []
       if(!this.$v.product.price.$dirty) return errors
       !this.$v.product.price.required && errors.push('price is required')
