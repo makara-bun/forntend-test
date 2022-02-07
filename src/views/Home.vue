@@ -21,6 +21,7 @@
         rounded
         dense
         v-model="searchProduct"
+        @keypress.enter.prevent="searchData"
       ></v-text-field>
     </template>
     <template v-slot:search-btn>

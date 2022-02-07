@@ -18,6 +18,7 @@
                   v-model="email"
                   :error-messages="emailErrors"
                   @blur="$v.email.$touch()"
+                  @keypress.enter.prevent="login"
                 ></v-text-field>
                 <v-text-field
                   id="password"
@@ -28,6 +29,7 @@
                   v-model="password"
                   :error-messages="passwordErrors"
                   @blur="$v.password.$touch()"
+                  @keypress.enter.prevent="login"
                 ></v-text-field>
               </v-form>
             </v-card-text>

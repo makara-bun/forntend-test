@@ -70,7 +70,7 @@ export default new Vuex.Store({
           // eslint-disable-next-line no-undef
           Toast.fire({
             icon: 'error',
-            title: 'invalid Email and Password'
+            title: 'Invalid Email and Password'
           })
         }
       })
