@@ -66,6 +66,12 @@ export default new Vuex.Store({
             title: 'Signed in successfully'
           })
           router.push({name:'home'})
+        }else {
+          // eslint-disable-next-line no-undef
+          Toast.fire({
+            icon: 'error',
+            title: 'invalid Email and Password'
+          })
         }
       })
       .catch (error => console.log(error)) 

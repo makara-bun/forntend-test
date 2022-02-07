@@ -58,7 +58,7 @@
 <script>
 import HeaderBar from "../components/HeaderBar.vue"
 import axios from 'axios'
-import {required, requiredIf} from 'vuelidate/lib/validators'
+import {required, numeric, requiredIf} from 'vuelidate/lib/validators'
 
 export default {
   name: 'Update',
@@ -82,8 +82,8 @@ export default {
     product: {
       name: {required},
       description: {required},
-      price: {required},
-      quantity: {required},
+      price: {required,numeric},
+      quantity: {required,numeric},
       image: {
         required: requiredIf(function () {
           return this.product.image === null;
@@ -126,25 +126,27 @@ export default {
     descriptionErrors () {
       const errors = []
       if(!this.$v.product.description.$dirty) return errors
-      !this.$v.product.description.required && errors.push('description is required')
+      !this.$v.product.description.required && errors.push('Description is required')
       return errors
     },
     priceErrors () {
       const errors = []
       if(!this.$v.product.price.$dirty) return errors
-      !this.$v.product.price.required && errors.push('price is required')
+      !this.$v.product.price.required && errors.push('Price is required')
+      !this.$v.product.price.numeric && errors.push('Price is only number')
       return errors
     },
     quantityErrors () {
       const errors = []
       if(!this.$v.product.quantity.$dirty) return errors
-      !this.$v.product.quantity.required && errors.push('quantity is required')
+      !this.$v.product.quantity.required && errors.push('Quantity is required')
+      !this.$v.product.quantity.numeric && errors.push('Quantity is only number')
       return errors
     },
     imageErrors () {
       const errors = []
       if(!this.$v.product.image.$dirty) return errors
-      !this.$v.product.image.required && errors.push('image is required')
+      !this.$v.product.image.required && errors.push('Image is required')
       return errors
     }
   },
