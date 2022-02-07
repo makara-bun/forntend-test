@@ -4,7 +4,13 @@
 ```
 npm install
 ```
-
+## Email and Password
+Email: admin@gmail.com
+Password : password
+```
+## Start jason server
+json-server --watch db.json
+```
 ### Compiles and hot-reloads for development
 ```
 npm run serve
