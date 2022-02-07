@@ -9,7 +9,7 @@
         href="/addProduct"
         dark
       >
-        <v-icon>mdi-plus</v-icon>
+      <v-icon>mdi-plus</v-icon>
         Add Product
       </v-btn>
     </template>

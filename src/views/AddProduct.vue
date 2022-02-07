@@ -4,7 +4,7 @@
     <v-container>
       <v-row>
         <v-col cols="12">
-            <h2 class="text-center pt-5">Add Product</h2>
+          <h2 class="text-center pt-5">Add Product</h2>
         </v-col>
       </v-row>
       <v-row>

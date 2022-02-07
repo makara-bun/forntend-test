@@ -5,11 +5,9 @@ import Home from '../views/Home.vue'
 import AddProduct from '../views/AddProduct.vue'
 import UpdateProduct from '../views/UpdateProduct.vue'
 
-
 Vue.use(VueRouter)
 
 const routes = [
-
   {
     name: "login",
     component: Login,
