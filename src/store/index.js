@@ -53,7 +53,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-  // Login
+    // Login
     login ({commit}, {email,password}) {
       axios.get (`http://localhost:3000/user?email=${email}&password=${password}`)
       .then (result => {

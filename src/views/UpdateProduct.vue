@@ -135,7 +135,7 @@ export default {
       !this.$v.product.price.required && errors.push('price is required')
       return errors
     },
-     quantityErrors () {
+    quantityErrors () {
       const errors = []
       if(!this.$v.product.quantity.$dirty) return errors
       !this.$v.product.quantity.required && errors.push('quantity is required')
